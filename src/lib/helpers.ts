@@ -129,7 +129,7 @@ const parseDetails = (detail: string, parsedListing: Listing) => {
     }
 
     if (detailName.includes('Comarca')) {
-        parsedListing.office = value.trim();
+        parsedListing.county = value.trim();
     }
 
     if (detailName.includes('Ofício')) {

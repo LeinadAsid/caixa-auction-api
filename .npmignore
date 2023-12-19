@@ -1,0 +1,5 @@
+node_modules/
+RJ.json
+src/
+tsconfig.json
+jest.config.js

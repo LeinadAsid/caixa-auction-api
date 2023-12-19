@@ -53,7 +53,7 @@ describe('API tests', () => {
                 realtyNumber: 1444410505954,
                 registration: 22029,
                 realtyRegistration: 2180820318002,
-                county: '',
+                county: 'ANGRA DOS REIS-RJ',
                 auctionType: 'Venda Online',
                 realtyType: 'Casa',
                 address:
