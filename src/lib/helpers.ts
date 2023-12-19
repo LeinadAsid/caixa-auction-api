@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
-import { AtLeast } from '../types/helpers';
-import { FormPayload, SearchPayload } from '../types/payload';
-import { Listing } from '../types/api';
+import { AtLeast } from './types/helpers';
+import { FormPayload, SearchPayload } from './types/payload';
+import { Listing } from './types/api';
 
 export const generateFormPayload = (config: AtLeast<FormPayload, 'cmb_estado'>): FormPayload => {
     return {

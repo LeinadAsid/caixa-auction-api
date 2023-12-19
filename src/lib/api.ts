@@ -1,8 +1,8 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import { BrazilStates } from '../types/payload';
+import { BrazilStates } from './types/payload';
 import { generateFormPayload, generateSearchPayload, parseListingData } from './helpers';
-import { CityCodes, Listing } from '../types/api';
+import { CityCodes, Listing } from './types/api';
 
 axios.defaults.timeout = 360_000;
 
