@@ -20,6 +20,11 @@ export interface Listing {
     endDate: string;
 }
 
+export interface CityCodes {
+    name: string;
+    code: string;
+}
+
 interface minPrice {
     price: number;
     isCashDown: boolean;

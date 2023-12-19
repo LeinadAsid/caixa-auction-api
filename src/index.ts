@@ -1,3 +1,3 @@
-import { getCityCodes, getPropertyListings } from './lib/api';
+import { getCityCodes, getPropertyListings, getPropertyCodes } from './lib/api';
 
-export { getCityCodes, getPropertyListings };
+export { getCityCodes, getPropertyListings, getPropertyCodes };

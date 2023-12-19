@@ -2,15 +2,24 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { BrazilStates } from '../types/payload';
 import { generateFormPayload, generateSearchPayload, parseListingData } from './helpers';
-import { Listing } from '../types/api';
+import { CityCodes, Listing } from '../types/api';
 
 axios.defaults.timeout = 360_000;
 
-export const getCityCodes = async (state: BrazilStates) => {
+/**
+ * Get all city codes for a state.
+ * this will not get codes for cities that don't have any listings.
+ * @function
+ * @param {BrazilStates} state - Brazilian state string.
+ * @returns {Promise<CityCodes[]>} Promise resolving in array of objects with cities names and their codes.
+ */
+export const getCityCodes = async (state: BrazilStates): Promise<CityCodes[]> => {
     const requestURl = 'https://venda-imoveis.caixa.gov.br/sistema/carregaListaCidades.asp';
     const payload = generateFormPayload({ cmb_estado: state });
 
-    const res = await axios.post(requestURl, new URLSearchParams({ ...payload }));
+    const res = await axios.post(requestURl, new URLSearchParams({ ...payload })).catch((err) => {
+        throw `Error in request to get city codes for this state. \n ${err}`;
+    });
 
     const $ = cheerio.load(res.data);
 
@@ -30,12 +39,20 @@ export const getCityCodes = async (state: BrazilStates) => {
     return cityNumbers;
 };
 
-export const getPropertyListings = async (state: BrazilStates, city: string) => {
-    const propertyCodes = await getPropertyCodes(state, city);
-
+/**
+ * Get property listing from code or list of codes.
+ * @function
+ * @param {string[] | string} propertyCodes - string or Array of property code(s).
+ * @returns {Promise<Listing[]>} Promise resolving in array of listing objects.
+ */
+export const getPropertyListings = async (propertyCodes: string[] | string): Promise<Listing[]> => {
     const requestURL = 'https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp';
 
     const propertyListings: Listing[] = [];
+
+    if (!Array.isArray(propertyCodes)) {
+        propertyCodes = [propertyCodes];
+    }
 
     for (let code of propertyCodes) {
         const payload = {
@@ -43,7 +60,7 @@ export const getPropertyListings = async (state: BrazilStates, city: string) => 
         };
 
         const res = await axios.post(requestURL, new URLSearchParams(payload)).catch((err) => {
-            throw `\n could not get property listings for ${city}. \n ${err}`;
+            throw `\n could not get property listings for code: ${code}. \n ${err}`;
         });
 
         const findDateQuery = 'strLista: "1@@" + "';
@@ -79,12 +96,21 @@ export const getPropertyListings = async (state: BrazilStates, city: string) => 
     return propertyListings;
 };
 
-const getPropertyCodes = async (state: BrazilStates, city: string) => {
+/**
+ * Get all property codes from a city.
+ * @function
+ * @param {BrazilStates} state - Brazilian state string.
+ * @param {string} city - city code string.
+ * @returns Promise resolving in string array of property code.
+ */
+export const getPropertyCodes = async (state: BrazilStates, city: string) => {
     const requestURl = 'https://venda-imoveis.caixa.gov.br/sistema/carregaPesquisaImoveis.asp';
 
     const payload = generateSearchPayload({ hdn_estado: state, hdn_cidade: city });
 
-    const res = await axios.post(requestURl, new URLSearchParams({ ...payload }));
+    const res = await axios.post(requestURl, new URLSearchParams({ ...payload })).catch((err) => {
+        throw `Error getting property codes for city: ${city} \n ${err}`;
+    });
 
     const $ = cheerio.load(res.data);
 
