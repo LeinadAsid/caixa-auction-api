@@ -78,4 +78,4 @@ Please make sure to update tests as appropriate.
 
 #### 1.0.5
 
--   Handling listings with more than one auction.
+-   Handling listings with more than one auction (not getting the price for the second one yet).
