@@ -1,6 +1,6 @@
 {
     "name": "caixa-auction",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Scrapes CAIXA website for real estate in auction",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
@@ -11,7 +11,12 @@
     "scripts": {
         "test": "jest",
         "build": "tsup src/index.ts --format cjs,esm --dts",
-        "lint": "tsc"
+        "lint": "tsc",
+        "release": "tsc && npm run test && npm run build && npm publish"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/LeinadAsid/caixa-auction-api.git"
     },
     "keywords": [
         "Wrapper",

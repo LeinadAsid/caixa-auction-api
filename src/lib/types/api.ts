@@ -26,6 +26,9 @@ export interface CityCodes {
 }
 
 interface minPrice {
-    price: number;
+    price: {
+        firstAuction: number;
+        secondAuction?: number;
+    };
     isCashDown: boolean;
 }

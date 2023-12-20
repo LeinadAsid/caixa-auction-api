@@ -41,7 +41,7 @@ export const parseListingData = (html: string) => {
 
     const parsedListing: Listing = {
         discount: 0,
-        minPrice: { isCashDown: false, price: 0 },
+        minPrice: { isCashDown: false, price: { firstAuction: 0 } },
         realtyNumber: 0,
         registration: 0,
         realtyRegistration: 0,
@@ -60,10 +60,13 @@ export const parseListingData = (html: string) => {
     parsedListing.name = dadosImovel.find('.control-item > h5').text().trim();
     const avaliacoes = dadosImovel.find('.content > p').find('br').replaceWith('\n').end().text().split('\n');
 
+    console.log(avaliacoes);
+
     parsedListing.price = Number(avaliacoes[0].replace(/[^\d,]/g, '').replace(/,/g, '.'));
-    parsedListing.minPrice.price = Number(
+    parsedListing.minPrice.price.firstAuction = Number(
         avaliacoes[1]
             .split('(')[0]
+            .replace('1º', '')
             .replace(/[^\d,]/g, '')
             .replace(/,/g, '.')
     );
