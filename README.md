@@ -25,7 +25,9 @@ console.log(listings);
 [
     {
     discount: undefined,
-    minPrice: { isCashDown: false, price: 1147000 },
+    minPrice: { isCashDown: false, price: {
+      firstAuction: 147000
+    } },
     realtyNumber: 8555517024953,
     registration: 83697,
     realtyRegistration: 3592904,
@@ -44,6 +46,7 @@ console.log(listings);
 ```
 
 ## Observations
+
 privateArea and plotArea are m²
 price is in R$ (Real Brasileiro).
 
@@ -60,19 +63,19 @@ to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-
 ## To-do list
-- [ ] Add property images links.
-- [ ] Handle properties with more than 1 auction.
-- [ ] Add other details (FGTS, Types of loans, etc...)
-- [ ] Add more tests and add CI
+
+-   [ ] Add property images links.
+-   [ ] Handle properties with more than 1 auction.
+-   [ ] Add other details (FGTS, Types of loans, etc...)
+-   [ ] Add more tests and add CI
 
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-
 ## Changelog
 
-#### 1.1.0
- - Handling listings with more than one auction.
+#### 1.0.5
+
+-   Handling listings with more than one auction.

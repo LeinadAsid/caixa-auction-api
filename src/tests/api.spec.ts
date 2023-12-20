@@ -49,7 +49,12 @@ describe('API tests', () => {
         const expectedResult = [
             {
                 discount: 26.22,
-                minPrice: { isCashDown: false, price: 205846.2 },
+                minPrice: {
+                    isCashDown: false,
+                    price: {
+                        firstAuction: 205846.2,
+                    },
+                },
                 realtyNumber: 1444410505954,
                 registration: 22029,
                 realtyRegistration: 2180820318002,

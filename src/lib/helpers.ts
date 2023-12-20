@@ -60,8 +60,6 @@ export const parseListingData = (html: string) => {
     parsedListing.name = dadosImovel.find('.control-item > h5').text().trim();
     const avaliacoes = dadosImovel.find('.content > p').find('br').replaceWith('\n').end().text().split('\n');
 
-    console.log(avaliacoes);
-
     parsedListing.price = Number(avaliacoes[0].replace(/[^\d,]/g, '').replace(/,/g, '.'));
     parsedListing.minPrice.price.firstAuction = Number(
         avaliacoes[1]
