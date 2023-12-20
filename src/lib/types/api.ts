@@ -14,7 +14,7 @@ export interface Listing {
     office: string;
     realtyRegistration: number;
     privateArea?: number;
-    plotArea_m2?: number;
+    plotArea?: number;
 
     //ISO Date string
     endDate: string;

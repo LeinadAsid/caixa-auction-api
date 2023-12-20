@@ -65,7 +65,7 @@ describe('API tests', () => {
                 rooms: 2,
                 garage: 1,
                 privateArea: 71.872,
-                plotArea_m2: 119.992,
+                plotArea: 119.992,
             },
         ];
 

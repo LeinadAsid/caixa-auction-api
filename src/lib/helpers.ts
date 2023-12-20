@@ -146,7 +146,7 @@ const parseDetails = (detail: string, parsedListing: Listing) => {
     }
 
     if (detailName.includes('Área do terreno')) {
-        parsedListing.plotArea_m2 = Number(
+        parsedListing.plotArea = Number(
             detailName
                 .split('=')[1]
                 .replace(/[^\d.,]+/g, '')
